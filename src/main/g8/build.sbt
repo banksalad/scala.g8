@@ -1,9 +1,23 @@
-// give the user a nice default project!
+import Dependencies._
+
 lazy val root = (project in file(".")).
   settings(
     inThisBuild(List(
-      organization := "com.example",
-      scalaVersion := "2.12.3"
+      organization := "$organization$",
+      scalaVersion := "$scala_version$"
     )),
-    name := "akka-http.g8"
+    name := "$name$",
+    version := "0.0.1",
+    scalacOptions ++= Seq(
+      "-unchecked",
+      "-feature",
+      "-deprecation",
+      "-language:postfixOps",
+      "-language:implicitConversions"
+    ),
+    libraryDependencies ++= Seq(
+      coreDependencies,
+      httpDependencies,
+      testDependencies
+    ).flatten
   )
