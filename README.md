@@ -4,7 +4,7 @@ A [Giter8][g8] template for Akka HTTP based on Rainist Scala practices
 
 ## Usage
 
-(TBD)
+`sbt new Rainist/akka-http.g8`
 
 ## Template license
 
