@@ -1,16 +1,16 @@
-# Rainist Akka HTTP Giter8 Template
+# Rainist Scala Project Giter8 Template
 
-A [Giter8][g8] template for Akka HTTP based on Rainist Scala practices
+A [Giter8][g8] template for Scala project based on Rainist Scala practices.
 
 ## Usage
 
 ### SBT
 
-`sbt new Rainist/akka-http.g8`
+`sbt new Rainist/scala.g8`
 
 ### Giter8
 
-`g8 Rainist/akka-http`
+`g8 Rainist/scala`
 
 ## Template license
 
