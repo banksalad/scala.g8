@@ -1,5 +1,7 @@
 # Rainist Scala Project Giter8 Template
 
+[![Build Status](https://travis-ci.org/Rainist/scala.g8.svg?branch=master)](https://travis-ci.org/Rainist/scala.g8)
+
 A [Giter8][g8] template for Scala project based on Rainist Scala practices.
 
 ## Usage
