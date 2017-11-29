@@ -16,8 +16,6 @@ lazy val root = (project in file(".")).
       "-language:implicitConversions"
     ),
     libraryDependencies ++= Seq(
-      coreDependencies,
-      httpDependencies,
       testDependencies
     ).flatten
   )
