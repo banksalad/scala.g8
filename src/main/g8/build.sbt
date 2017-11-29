@@ -6,7 +6,7 @@ lazy val root = (project in file(".")).
       organization := "$organization$",
       scalaVersion := "$scala_version$"
     )),
-    name := "$name$",
+    name := "$name;format="start"$",
     version := "0.0.1",
     scalacOptions ++= Seq(
       "-unchecked",
