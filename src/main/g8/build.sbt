@@ -20,5 +20,6 @@ lazy val root = (project in file(".")).settings(
     testDependencies
   ).flatten,
   scalafmtOnCompile := true,
-  autoCompilerPlugins := true
+  autoCompilerPlugins := true,
+  assemblyJarName in assembly := "$name;format="normalize"$.jar"
 )
