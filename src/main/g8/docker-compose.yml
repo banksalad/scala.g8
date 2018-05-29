@@ -2,7 +2,7 @@ version: '3'
 services:
   app:
     build: .
-    command: sbt "~ ;re-start ; run"
+    command: sbt "~ ;reStart ; run"
     volumes:
       - .:/var/www/app
     stdin_open: true
