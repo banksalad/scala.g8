@@ -1,4 +1,4 @@
-FROM rainist/sbt:$sbt_version$-slim-stretch AS build
+FROM rainist/sbt:$sbt_version$-alpine AS build
 
 LABEL maintainer="Rainist Engineering <engineering@rainist.com>"
 
@@ -14,7 +14,7 @@ ADD ./src /app/src
 RUN sbt assembly
 
 # Runtime
-FROM openjdk:8u181-jre-slim-stretch
+FROM openjdk:openjdk:8-jre-alpine
 
 WORKDIR /app
 
