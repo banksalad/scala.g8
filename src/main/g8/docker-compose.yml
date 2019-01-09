@@ -3,7 +3,7 @@ services:
   app:
     build:
       context: .
-      target: build
+      target: compile
     command: sbt "~ ;reStart ; run"
     volumes:
       - .:/app

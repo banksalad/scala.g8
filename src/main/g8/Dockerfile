@@ -1,4 +1,4 @@
-FROM rainist/sbt:$sbt_version$-alpine AS build
+FROM rainist/sbt:$sbt_version$-alpine AS compile
 
 LABEL maintainer="Rainist Engineering <engineering@rainist.com>"
 
@@ -9,9 +9,17 @@ COPY ./build.sbt .
 
 RUN sbt compile
 
+
+# Builder
+FROM rainist/sbt:$sbt_version$-alpine AS build
+
+WORKDIR /app
+
+COPY --from=build /app .
 COPY ./src /app/src
 
 RUN sbt assembly
+
 
 # Runtime
 FROM openjdk:openjdk:8-jre-alpine
