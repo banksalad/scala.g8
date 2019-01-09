@@ -9,7 +9,7 @@ COPY ./build.sbt .
 
 RUN sbt compile
 
-ADD ./src /app/src
+COPY ./src /app/src
 
 RUN sbt assembly
 
