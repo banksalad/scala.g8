@@ -1,9 +1,27 @@
-FROM rainist/sbt:$sbt_version$
+FROM rainist/sbt:$sbt_version$-slim-stretch AS build
 
-RUN mkdir -p /var/www/app
-WORKDIR /var/www/app
+LABEL maintainer="Rainist Engineering <engineering@rainist.com>"
 
-ADD ./project /var/www/app/project
-ADD ./build.sbt /var/www/app/build.sbt
+WORKDIR /app
+
+COPY ./project ./project
+COPY ./build.sbt .
 
 RUN sbt compile
+
+ADD ./src /app/src
+
+RUN sbt assembly
+
+# Runtime
+FROM openjdk:8u181-jre-slim-stretch
+
+WORKDIR /app
+
+COPY --from=build /app/target/scala-$scala_version_short$/app.jar /app/app.jar
+
+ENTRYPOINT ["java"]
+CMD ["-XX:+UnlockExperimentalVMOptions", \
+  "-XX:+UseCGroupMemoryLimitForHeap", \
+  "-XX:MaxRAMFraction=1", \
+  "-jar", "app.jar"]

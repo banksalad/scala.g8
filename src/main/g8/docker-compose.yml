@@ -1,8 +1,10 @@
-version: '3'
+version: '3.4'
 services:
   app:
-    build: .
+    build:
+      context: .
+      target: build
     command: sbt "~ ;reStart ; run"
     volumes:
-      - .:/var/www/app
+      - .:/app
     stdin_open: true
