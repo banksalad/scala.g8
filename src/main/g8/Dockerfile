@@ -1,4 +1,4 @@
-FROM rainist/sbt:$sbt_version$-alpine AS compile
+FROM rainist/sbt:$sbt_version$-alpine AS builder
 
 LABEL maintainer="Rainist Engineering <engineering@rainist.com>"
 
@@ -6,19 +6,9 @@ WORKDIR /app
 
 COPY ./project ./project
 COPY ./build.sbt .
-
-RUN sbt compile
-
-
-# Builder
-FROM rainist/sbt:$sbt_version$-alpine AS build
-
-WORKDIR /app
-
-COPY --from=compile /app .
 COPY ./src ./src
 
-RUN sbt assembly
+RUN sbt 'set test in assembly := {}' clean assembly
 
 
 # Runtime
@@ -26,7 +16,7 @@ FROM openjdk:8-jre-alpine
 
 WORKDIR /app
 
-COPY --from=build /app/target/app.jar ./app.jar
+COPY --from=builder /app/target/app.jar ./app.jar
 
 ENTRYPOINT ["java"]
 CMD ["-XX:+UnlockExperimentalVMOptions", \
