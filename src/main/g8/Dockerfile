@@ -15,18 +15,18 @@ FROM rainist/sbt:$sbt_version$-alpine AS build
 
 WORKDIR /app
 
-COPY --from=build /app .
-COPY ./src /app/src
+COPY --from=compile /app .
+COPY ./src ./src
 
 RUN sbt assembly
 
 
 # Runtime
-FROM openjdk:openjdk:8-jre-alpine
+FROM openjdk:8-jre-alpine
 
 WORKDIR /app
 
-COPY --from=build /app/target/$name$/app.jar /app/app.jar
+COPY --from=build /app/target/app.jar ./app.jar
 
 ENTRYPOINT ["java"]
 CMD ["-XX:+UnlockExperimentalVMOptions", \
