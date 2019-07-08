@@ -26,7 +26,7 @@ FROM openjdk:openjdk:8-jre-alpine
 
 WORKDIR /app
 
-COPY --from=build /app/target/scala-$scala_version_short$/app.jar /app/app.jar
+COPY --from=build /app/target/$name$/app.jar /app/app.jar
 
 ENTRYPOINT ["java"]
 CMD ["-XX:+UnlockExperimentalVMOptions", \
