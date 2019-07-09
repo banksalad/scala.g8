@@ -1,11 +1,11 @@
 language: scala
 scala:
-  - $sbt_version$
+  - $scala_version$
 
 cache:
   directories:
     - .autoconf
-    - $HOME/.m2
+    - \$HOME/.m2
 
 services:
   - docker
