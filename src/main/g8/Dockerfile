@@ -1,9 +1,25 @@
-FROM rainist/sbt:$sbt_version$
+FROM rainist/sbt:$sbt_version$-alpine AS builder
 
-RUN mkdir -p /var/www/app
-WORKDIR /var/www/app
+LABEL maintainer="Rainist Engineering <engineering@rainist.com>"
 
-ADD ./project /var/www/app/project
-ADD ./build.sbt /var/www/app/build.sbt
+WORKDIR /app
 
-RUN sbt compile
+COPY ./project ./project
+COPY ./build.sbt .
+COPY ./src ./src
+
+RUN sbt 'set test in assembly := {}' clean assembly
+
+
+# Runtime
+FROM openjdk:8-jre-alpine
+
+WORKDIR /app
+
+COPY --from=builder /app/target/app.jar ./app.jar
+
+ENTRYPOINT ["java"]
+CMD ["-XX:+UnlockExperimentalVMOptions", \
+  "-XX:+UseCGroupMemoryLimitForHeap", \
+  "-XX:MaxRAMFraction=1", \
+  "-jar", "app.jar"]

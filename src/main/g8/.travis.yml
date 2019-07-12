@@ -1,7 +1,15 @@
-sudo: required
+language: scala
+
+scala:
+  - $scala_version$
+
+cache:
+  directories:
+    - .autoconf
+    - \$HOME/.m2
 
 services:
   - docker
 
 script:
-  - docker-compose run app sbt clean scalafmt::test test
+  - sbt clean scalafmt::test test
